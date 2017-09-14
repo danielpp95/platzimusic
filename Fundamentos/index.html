@@ -8,11 +8,30 @@
 </head>
 <body>
     <div id="app">
-        <button  @click="sumar">sumar 1</button>    <!-- evento llamado con @click -->
-        <button v-on:click="restar" >restar 1</button>  <!-- evento llamado con v-on:click -->
-        <button v-on:click="contador*=contador" >cuadrado</button> <!-- evento llamado con en linea de codigo con v-on:click -->
-        <button @click="contador=0" >AC</button>
-        El contador esta en {{ contador }}
+        <input type="text" name="nombre" placeholder="ingresa tu nombre" v-model="nombre " />
+        <p>Tu nombre en mayuscula es: {{ nombre  }} </p>
+
+        <form v-on:submit.prevent="submit">
+            <h2>¿Cuales son tus cursos favoritos?</h2>
+
+            <input v-model="cursos" type="checkbox" id="vue" value="vue">
+            <label for="vue">Curso de Vue.js</label>
+            <br>
+
+            <input v-model="cursos" type="checkbox" id="seo" value="seo">
+            <label for="seo">Curso de seo</label>
+            <br>
+            
+            <input v-model="cursos" type="checkbox" id="react" value="react">
+            <label for="react">Curso de React y Redux</label>
+            <br>
+
+            <input v-model="cursos" type="checkbox" id="growth" value="growth">
+            <label for="growth">Curso de Growth Marketing</label>
+            <br>
+
+            <button type="submit">Enviar</button>
+        </form>
     </div>
 
     <script src="https://unpkg.com/vue"></script>
@@ -20,11 +39,17 @@
         let app = new Vue({
             el: '#app',
             data: {
-                contador: 0
+                nombre: '',
+                cursos: []
+            },
+            filters: {
+                uppercase:  srt => { return str.toUpperCase() }, 
             },
             methods: {
-                sumar() { this.contador++ }, 
-                restar() { this.contador-- }
+                submit() {
+                    console.log('funcion bonita')
+                    console.log(this.cursos)
+                },
             }
         })
     </script>
