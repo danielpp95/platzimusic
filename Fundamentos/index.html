@@ -8,9 +8,11 @@
 </head>
 <body>
     <div id="app">
-        <h1>{{titulo | uppercase }}</h1>
-        <h2> {{subtitulo | lowercase }} </h2>
-        <h3> {{tarea |  capitalize }} </h3>
+        <button  @click="sumar">sumar 1</button>    <!-- evento llamado con @click -->
+        <button v-on:click="restar" >restar 1</button>  <!-- evento llamado con v-on:click -->
+        <button v-on:click="contador*=contador" >cuadrado</button> <!-- evento llamado con en linea de codigo con v-on:click -->
+        <button @click="contador=0" >AC</button>
+        El contador esta en {{ contador }}
     </div>
 
     <script src="https://unpkg.com/vue"></script>
@@ -18,14 +20,11 @@
         let app = new Vue({
             el: '#app',
             data: {
-                titulo: 'Estas en platzi',
-                subtitulo: 'Estas viendo el curso de Vue.js',
-                tarea: 'tAREA'
+                contador: 0
             },
-            filters: {
-                uppercase: str => { return str.toUpperCase() },
-                lowercase: str => { return str.toLowerCase() },
-                capitalize: str => { return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase(); }
+            methods: {
+                sumar() { this.contador++ }, 
+                restar() { this.contador-- }
             }
         })
     </script>
