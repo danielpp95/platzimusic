@@ -8,8 +8,19 @@
 </head>
 <body>
     <div id="app">
-        hola {{nombre}}
-        <a :href=url>{{pagina}}</a>
+        <!-- v-if elimina el archivo del html -->
+        <template v-if="mostrar">
+            hola {{nombre}}
+            <a v-if="mostrar" :href=url>{{pagina}}</a>
+        </template>
+        <!-- v-show trabaja con css mostrando u oculdando con display: none -->
+        <!-- no puede ser usado con template -->
+        <div v-show="mostrar">
+                hola {{nombre}}
+        </div>
+        <div v-show="!mostrar">
+                esto esta oculto
+        </div>
     </div>
 
     <script src="https://unpkg.com/vue"></script>
@@ -19,7 +30,9 @@
             data: {
                 nombre: "Daniel", 
                 pagina: "Google",
-                url: 'https://google.com'
+                url: 'https://google.com',
+                mostrar: true,
+
             }
         })
     </script>
