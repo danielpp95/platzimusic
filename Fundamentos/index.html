@@ -8,47 +8,48 @@
 </head>
 <body>
     <div id="app">
-        <input type="text" name="nombre" placeholder="ingresa tu nombre" v-model="nombre " />
-        <p>Tu nombre en mayuscula es: {{ nombre  }} </p>
-
         <form v-on:submit.prevent="submit">
             <h2>¿Cuales son tus cursos favoritos?</h2>
-
-            <input v-model="cursos" type="checkbox" id="vue" value="vue">
-            <label for="vue">Curso de Vue.js</label>
-            <br>
-
-            <input v-model="cursos" type="checkbox" id="seo" value="seo">
-            <label for="seo">Curso de seo</label>
-            <br>
-            
-            <input v-model="cursos" type="checkbox" id="react" value="react">
-            <label for="react">Curso de React y Redux</label>
-            <br>
-
-            <input v-model="cursos" type="checkbox" id="growth" value="growth">
-            <label for="growth">Curso de Growth Marketing</label>
-            <br>
+            <template v-for="curso in cursos" >
+                <input v-model="cursosSeleccionados" type="checkbox" :id="curso.value" :value="curso.value">
+                <label :for="curso.value"> {{curso.nombre}} </label>
+                <br>
+            </template>
 
             <button type="submit">Enviar</button>
         </form>
     </div>
 
-    <script src="https://unpkg.com/vue"></script>
+    <script src="./vue.js"></script>
     <script>
         let app = new Vue({
             el: '#app',
             data: {
                 nombre: '',
-                cursos: []
-            },
-            filters: {
-                uppercase:  srt => { return str.toUpperCase() }, 
+                cursos: [
+                    {
+                        nombre: "Curso de introduccion a Vue.js",
+                        value: 'vue'
+                    },
+                    {
+                        nombre: "Curso de seo",
+                        value: 'seo'
+                    },
+                    {
+                        nombre: "Curso de React y Reduc",
+                        value: 'react'
+                    },
+                    {
+                        nombre: "Curso de Growth Marketing",
+                        value: 'growth'
+                    }
+                ],
+                cursosSeleccionados: []
             },
             methods: {
                 submit() {
-                    console.log('funcion bonita')
-                    console.log(this.cursos)
+                    console.log('se ejecuta el metodo submit')
+                    console.log(this.cursosSeleccionados)
                 },
             }
         })
